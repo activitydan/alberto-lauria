@@ -36,31 +36,65 @@ const base = import.meta.env.BASE_URL
 
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: 'Alberto Lauria',
-      jobTitle: 'Graphic Designer and Creative Director',
-      url: 'https://albertolauria.com',
-      email: 'mailto:albertolauriawork@gmail.com',
-      sameAs: [
-        'https://instagram.com/2albbb',
-        'https://spaziodesk.com',
-      ],
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Ragusa',
-        addressRegion: 'Sicily',
-        addressCountry: 'IT',
-      },
-      worksFor: {
-        '@type': 'Organization',
-        name: 'Spazio Desk',
-        url: 'https://spaziodesk.com',
-      },
-      founder: [
+      '@graph': [
         {
-          '@type': 'Organization',
-          name: 'Spazio Desk',
-          url: 'https://spaziodesk.com',
+          '@type': 'WebSite',
+          '@id': 'https://albertolauria.com/#website',
+          name: 'Alberto Lauria',
+          url: 'https://albertolauria.com',
+        },
+        {
+          '@type': 'ProfilePage',
+          '@id': 'https://albertolauria.com/#webpage',
+          name: 'Alberto Lauria — Graphic Designer e Direttore Creativo',
+          url: 'https://albertolauria.com/',
+          isPartOf: { '@id': 'https://albertolauria.com/#website' },
+          about: { '@id': 'https://albertolauria.com/#person' },
+          breadcrumb: {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Alberto Lauria',
+                item: 'https://albertolauria.com/',
+              },
+            ],
+          },
+        },
+        {
+          '@type': 'Person',
+          '@id': 'https://albertolauria.com/#person',
+          name: 'Alberto Lauria',
+          jobTitle: 'Graphic Designer and Creative Director',
+          url: 'https://albertolauria.com',
+          email: 'mailto:albertolauriawork@gmail.com',
+          sameAs: [
+            'https://instagram.com/2albbb',
+            'https://spaziodesk.com',
+          ],
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Ragusa',
+            addressRegion: 'Sicily',
+            addressCountry: 'IT',
+          },
+          worksFor: {
+            '@type': 'Organization',
+            '@id': 'https://spaziodesk.com/#organization',
+            name: 'Spazio Desk',
+            url: 'https://spaziodesk.com',
+            founder: { '@id': 'https://albertolauria.com/#person' },
+            sameAs: ['https://albertolauria.com'],
+          },
+          founder: [
+            {
+              '@type': 'Organization',
+              '@id': 'https://spaziodesk.com/#organization',
+              name: 'Spazio Desk',
+              url: 'https://spaziodesk.com',
+            },
+          ],
         },
       ],
     })} />
