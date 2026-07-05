@@ -10,6 +10,60 @@ const base = import.meta.env.BASE_URL
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Alberto Lauria</title>
+    <meta
+      name="description"
+      content="Alberto Lauria, Graphic Designer e Direttore Creativo di Ragusa, Sicilia. Fondatore di Desk e Spazio Desk, piattaforme dedicate alla creatività e alla collaborazione."
+    />
+    <link rel="canonical" href="https://albertolauria.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Alberto Lauria" />
+    <meta property="og:title" content="Alberto Lauria" />
+    <meta
+      property="og:description"
+      content="Alberto Lauria, Graphic Designer e Direttore Creativo di Ragusa, Sicilia. Fondatore di Desk e Spazio Desk."
+    />
+    <meta property="og:url" content="https://albertolauria.com/" />
+    <meta property="og:image" content="https://albertolauria.com/icons/android-chrome-512x512.png" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Alberto Lauria" />
+    <meta
+      name="twitter:description"
+      content="Alberto Lauria, Graphic Designer e Direttore Creativo di Ragusa, Sicilia. Fondatore di Desk e Spazio Desk."
+    />
+    <meta name="twitter:image" content="https://albertolauria.com/icons/android-chrome-512x512.png" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Alberto Lauria',
+      jobTitle: 'Graphic Designer and Creative Director',
+      url: 'https://albertolauria.com',
+      email: 'mailto:albertolauriawork@gmail.com',
+      sameAs: [
+        'https://instagram.com/2albbb',
+        'https://spaziodesk.com',
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Ragusa',
+        addressRegion: 'Sicily',
+        addressCountry: 'IT',
+      },
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Spazio Desk',
+        url: 'https://spaziodesk.com',
+      },
+      founder: [
+        {
+          '@type': 'Organization',
+          name: 'Spazio Desk',
+          url: 'https://spaziodesk.com',
+        },
+      ],
+    })} />
 
     <link rel="icon" type="image/png" href={`${base}icons/favicon-16x16.png`} sizes="16x16" />
     <link rel="icon" type="image/png" href={`${base}icons/favicon-32x32.png`} sizes="32x32" />
