@@ -14,10 +14,6 @@ export default defineConfig({
   site: isGithubActions ? 'https://activitydan.github.io' : 'https://spaziodesk.com',
   base: isGithubActions ? '/Spazio-Desk/' : '/',
 
-  redirects: {
-    '/': '/about',
-  },
-
   scopedStyleStrategy: 'class',
 
   server: {
