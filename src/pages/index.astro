@@ -278,19 +278,42 @@ const base = import.meta.env.BASE_URL
 
         this.onScroll()
 
-        // Sound toggle
-        const toggle = document.querySelector('.js-sound-toggle')
+        // Sound toggle + autoplay
+        const toggle = document.querySelector('.js-sound-toggle') as HTMLElement
         const audio = document.getElementById('ambient-audio') as HTMLAudioElement
-        let playing = false
+
+        const setSoundUI = (isPlaying: boolean) => {
+          if (toggle) toggle.style.opacity = isPlaying ? '1' : '0.3'
+        }
+
+        const tryAutoplay = () => {
+          audio
+            .play()
+            .then(() => setSoundUI(true))
+            .catch(() => {
+              // Browsers block unmuted autoplay without a user gesture —
+              // start on the visitor's first interaction with the page instead.
+              const resume = () => {
+                audio
+                  .play()
+                  .then(() => setSoundUI(true))
+                  .catch(() => {})
+              }
+              document.addEventListener('click', resume, { once: true })
+              document.addEventListener('keydown', resume, { once: true })
+              document.addEventListener('touchstart', resume, { once: true })
+            })
+        }
+
+        document.addEventListener('intro', tryAutoplay, { once: true })
+
         toggle?.addEventListener('click', () => {
-          if (!playing) {
+          if (audio.paused) {
             audio.play()
-            ;(toggle as HTMLElement).style.opacity = '1'
-            playing = true
+            setSoundUI(true)
           } else {
             audio.pause()
-            ;(toggle as HTMLElement).style.opacity = '0.3'
-            playing = false
+            setSoundUI(false)
           }
         })
 
