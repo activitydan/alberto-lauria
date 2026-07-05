@@ -286,26 +286,26 @@ const base = import.meta.env.BASE_URL
           if (toggle) toggle.style.opacity = isPlaying ? '1' : '0.3'
         }
 
-        const tryAutoplay = () => {
+        // Browsers block unmuted autoplay without a user gesture, so listen
+        // for the visitor's first interaction from the very start — not just
+        // after the intro animation — so an early click isn't missed.
+        const resume = () => {
           audio
             .play()
             .then(() => setSoundUI(true))
-            .catch(() => {
-              // Browsers block unmuted autoplay without a user gesture —
-              // start on the visitor's first interaction with the page instead.
-              const resume = () => {
-                audio
-                  .play()
-                  .then(() => setSoundUI(true))
-                  .catch(() => {})
-              }
-              document.addEventListener('click', resume, { once: true })
-              document.addEventListener('keydown', resume, { once: true })
-              document.addEventListener('touchstart', resume, { once: true })
-            })
+            .catch(() => {})
         }
+        document.addEventListener('click', resume, { once: true })
+        document.addEventListener('keydown', resume, { once: true })
+        document.addEventListener('touchstart', resume, { once: true })
 
-        document.addEventListener('intro', tryAutoplay, { once: true })
+        document.addEventListener(
+          'intro',
+          () => {
+            audio.play().then(() => setSoundUI(true)).catch(() => {})
+          },
+          { once: true }
+        )
 
         toggle?.addEventListener('click', () => {
           if (audio.paused) {
