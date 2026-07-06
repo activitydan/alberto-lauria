@@ -5,12 +5,13 @@ const menu = [
   {
     id: 'about',
     text: 'About',
-    href: 'https://spaziodesk.com/about',
+    href: '#about',
   },
   {
     id: 'contact',
     text: 'Contact',
     href: 'https://spaziodesk.com/contact',
+    external: true,
   },
 ]
 ---
@@ -44,7 +45,12 @@ const menu = [
         {
           menu.map((item) => (
             <li class="sb__item js-menu-item">
-              <a href={item.href ?? '#' + item.id} class="js-menu-link">
+              <a
+                href={item.href ?? '#' + item.id}
+                class="js-menu-link"
+                rel={item.external ? 'nofollow noreferrer noopener' : undefined}
+                target={item.external ? '_blank' : undefined}
+              >
                 <span class="sb__text">{item.text}</span>
               </a>
             </li>
