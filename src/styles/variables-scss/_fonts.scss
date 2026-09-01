@@ -6,14 +6,14 @@
 
 /* Families */
 $theme-font-families: (
-  fraktion: "'Helvetica Neue', monospace",
-  editorial: "'Helvetica Neue', sans-serif",
-  bigger: "'Helvetica Neue', sans-serif",
+  fraktion: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+  editorial: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+  bigger: "'Helvetica Neue', Helvetica, Arial, sans-serif",
 );
 
 /* Sizes */
 $theme-font-styles: (
   default: (
-    base: (15px, 400, 1.48, editorial, -0.025em),
+    base: (15px, 700, 1.48, editorial, -0.025em),
   ),
 );
