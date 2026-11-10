@@ -11,6 +11,7 @@ const menu = [
     id: 'contact',
     text: 'Contact',
     href: 'https://spaziodesk.com/contact',
+    external: true,
   },
 ]
 ---
@@ -44,7 +45,12 @@ const menu = [
         {
           menu.map((item) => (
             <li class="sb__item js-menu-item">
-              <a href={item.href ?? '#' + item.id} class="js-menu-link">
+              <a
+                href={item.href ?? '#' + item.id}
+                class="js-menu-link"
+                rel={item.external ? 'nofollow noreferrer noopener' : undefined}
+                target={item.external ? '_blank' : undefined}
+              >
                 <span class="sb__text">{item.text}</span>
               </a>
             </li>
@@ -168,33 +174,35 @@ const menu = [
       const logo = this.el.querySelector('.js-logo')
       const menuItems = this.el.querySelectorAll('.js-menu-item')
 
-      const items = [logo, ...menuItems]
+      const items = [logo, ...menuItems, this.contrastButton]
 
       const tl = gsap.timeline()
 
-      tl.set(this.el, {
-        opacity: 1,
-      })
+      tl.set(this.el, { opacity: 1 }, 1)
 
-      tl.from(
-        this.el,
-        {
-          y: '-100%',
-          duration: 1.5,
-          ease: 'expo.inOut',
-        },
-        1
-      )
+      tl.set(items, { opacity: 0 }, 1)
 
-      tl.from(
+      tl.to(
         items,
         {
-          y: '-100%',
-          duration: 1.5,
-          ease: 'expo.out',
-          stagger: 0.1,
+          keyframes: [
+            { opacity: 1, duration: 0, ease: 'none' },
+            { opacity: 1, duration: 0.08 },
+            { opacity: 0, duration: 0, ease: 'none' },
+            { opacity: 0, duration: 0.07 },
+            { opacity: 1, duration: 0, ease: 'none' },
+            { opacity: 1, duration: 0.1 },
+            { opacity: 0, duration: 0, ease: 'none' },
+            { opacity: 0, duration: 0.18 },
+            { opacity: 1, duration: 0, ease: 'none' },
+            { opacity: 1, duration: 0.06 },
+            { opacity: 0, duration: 0, ease: 'none' },
+            { opacity: 0, duration: 0.1 },
+            { opacity: 1, duration: 0, ease: 'none' },
+          ],
+          stagger: 0.45,
         },
-        1.5
+        1
       )
 
       tl.call(
@@ -202,7 +210,7 @@ const menu = [
           this.canWrite = true
         },
         null,
-        1.5
+        1
       )
     }
 
@@ -382,7 +390,7 @@ const menu = [
       margin: 0 auto 0 0;
       padding: 1.5rem;
 
-      font: 400 8px / 1.4 font-family(fraktion);
+      font: 700 8px / 1.4 font-family(fraktion);
       text-transform: uppercase;
       white-space: pre-line;
 
@@ -462,7 +470,7 @@ const menu = [
         padding: 2rem 3rem;
 
         color: color(secondary);
-        font: 400 14px / 1 font-family(fraktion);
+        font: 700 14px / 1 font-family(fraktion);
         letter-spacing: 0.05em;
         text-decoration: none;
         text-transform: uppercase;
